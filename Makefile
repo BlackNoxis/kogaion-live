@@ -8,7 +8,6 @@ BINDIR ?= /bin
 LIBEXECDIR ?= /usr/libexec
 SYSCONFDIR ?= /etc
 SYSTEMD_UNITDIR ?= $(LIBDIR)/systemd/system
-SYSV_INITDIR = /etc/init.d
 
 all:
 	for d in $(SUBDIRS); do $(MAKE) -C $$d; done
@@ -24,6 +23,7 @@ install:
 	install -m 0755 kogaionlive.sh $(DESTDIR)/$(LIBEXECDIR)/
 	install -m 0755 x-setup.sh $(DESTDIR)/$(LIBEXECDIR)/
 	install -m 0755 cdeject.sh $(DESTDIR)/$(LIBEXECDIR)/
+	install -m 0755 graphical_start.sh $(DESTDIR)/$(LIBEXECDIR)/
 
 	install -d $(DESTDIR)/$(SBINDIR)
 	install -d $(DESTDIR)/$(BINDIR)
@@ -48,9 +48,3 @@ install:
 	install -d $(DESTDIR)/$(SYSTEMD_UNITDIR)/
 	install -m 0644 *.service $(DESTDIR)/$(SYSTEMD_UNITDIR)/
 
-	install -d $(DESTDIR)/$(SYSV_INITDIR)/
-	install -m 0755 x-setup-init.d $(DESTDIR)/$(SYSV_INITDIR)/x-setup
-	install -m 0755 kogaionlive $(DESTDIR)/$(SYSV_INITDIR)/
-	install -m 0755 installer-gui $(DESTDIR)/$(SYSV_INITDIR)/
-	install -m 0755 installer-text $(DESTDIR)/$(SYSV_INITDIR)/
-	install -m 0755 cdeject $(DESTDIR)/$(SYSV_INITDIR)/
